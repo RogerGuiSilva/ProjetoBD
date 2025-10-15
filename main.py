@@ -1,11 +1,19 @@
 from flask import Flask
 
-app = Flask (__name__)
+app = Flask(__name__)
 
-@app.route ("/api", methods = ['GET'])
+# Rota principal (raiz)
+@app.route("/", methods=['GET'])
+def home():
+    return {
+        'message': 'Bem-vindo à API!'
+    }
+
+# Rota da API
+@app.route("/api", methods=['GET'])
 def index():
     return {
-        'message' : 'Api rodando'
+        'message': 'API rodando'
     }
 
 if __name__ == '__main__':
