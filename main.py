@@ -3,14 +3,14 @@ from tarefa import buscar_tarefas, buscar_tarefa
 
 app = Flask(__name__)
 
-# Rota principal (raiz)
+
 @app.route("/", methods=['GET'])
 def home():
     return {
         'message': 'Bem-vindo à API!'
     }
 
-# Rota da API
+
 @app.route("/api", methods=['GET'])
 def index():
 
