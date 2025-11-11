@@ -1,28 +1,31 @@
+
+from conexao import get_conexao
+
+
+from psycopg2.extras import RealDictCursor
+
+
 from flask import jsonify
 
 def buscar_tarefas():
-    tarefas = [
-        {
-            'id': 1,
-            'nome': 'Aprender digitação',
-            'descricao': 'Vamos aumentar o zoom para não errar a digitação',
-            'status': 'Pendente'
-        },
-        {
-            'id': 2,
-            'nome': 'Aprender Python',
-            'descricao': 'Aprender python para programar apis',
-            'status': 'Pendente'
-        }
-    ]
+    conn = get_conexao()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    cursor.execute(
+        "SELECT id, nome, descricao FROM tarefas;"
+    )
+    
+    tarefas = cursor.fetchall()
+
+    
+    cursor.close()
+    conn.close()
 
     return jsonify(tarefas)
 
-def buscar_tarefa():
-    tarefa = {
-        'id': 1,
-        'nome': 'Aprender digitação',
-        'descricao': 'Vamos aumentar o zoom para não errar a digitação',
-        'status': 'Pendente'
-    }
-    return jsonify(tarefa)
+def create(name,description):
+ conn = get_conexao()
+cursor = conn.cursor()
+cursor.execute(
+    "INSERT INTO todos (nome,description) VALUES (%s,%s)",
+    (name, description)
+    )
