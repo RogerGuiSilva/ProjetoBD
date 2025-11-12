@@ -21,3 +21,16 @@ def create(name, description):
     conn.commit()
     cursor.close()
     conn.close()
+
+    def apagar_tarefa(tarefa_id):
+        conn = get_conexao()
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM todos WHERE id= %s ",
+        tarefa_id
+    )
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
