@@ -1,5 +1,5 @@
 from flask import Flask, request
-from tarefa import buscar_tarefas, buscar_tarefa
+from tarefa import buscar_tarefas,create
 
 app = Flask(__name__)
 
@@ -27,15 +27,15 @@ def get_tarefas():
 
 @app.route('/api/tarefa', methods=['GET'])
 def get_tarefa():
-    tarefa = buscar_tarefa()
+    tarefa = buscar_tarefas()
     return tarefa
 
-@app.route ('/api/tarefa/<int:todo_id', methods=['POST'])
-def create_tarefa();
+@app.route ('/api/tarefa/<int:todo_id>', methods=['POST'])
+def create_tarefa():
     corpo = request.get_json()
     tarefa_name = corpo.get('name')
     tarefa_description = corpo.get('description')
-    criar_tarefa(tarefa_name, tarefa_description)
+    create(tarefa_name, tarefa_description)
     return {
         'message': 'Tarefa cadastrada'
     }
