@@ -1,5 +1,6 @@
 from flask import Flask, request
-from tarefa import buscar_tarefas,create
+from tarefa import buscar_tarefas, create, apagar_tarefa, atualizar_tarefa
+
 
 app = Flask(__name__)
 
@@ -30,7 +31,7 @@ def get_tarefa():
     tarefa = buscar_tarefas()
     return tarefa
 
-@app.route ('/api/tarefa/<int:todo_id>', methods=['POST'])
+@app.route ('/api/tarefas', methods=['POST'])
 def create_tarefa():
     corpo = request.get_json()
     tarefa_name = corpo.get('name')
@@ -39,6 +40,22 @@ def create_tarefa():
     return {
         'message': 'Tarefa cadastrada'
     }
+
+@app.route ('/api/tarefas/<int:tarefa_id>', methods=['DELETE'])
+def delete_tarefa(tarefa_id):
+    apagar_tarefa(tarefa_id)
+    return {
+        'message': 'Tarefa apagada com sucesso'
+    }
+@app.route ('/api/tarefas/<int:tarefa_id>', methods=['PUT'])
+def uptade_tarefa(tarefa_id)
+ corpo = request.get_json()
+ tarefa_name = corpo.get('name')
+ tarefa_description = corpo.get('description')
+atualizar_tarefa(tarefa_id,)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
