@@ -34,7 +34,7 @@ def apagar_tarefa(tarefa_id):
     conn.commit()
     cursor.close()
     conn.close()
-
+abcd
     def atualizar_tarefa(tarefa_id,name, description):
      conn = get_conexao()
     cursor = conn.cursor()
